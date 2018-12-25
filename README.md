@@ -5,18 +5,32 @@ gitlabRunner+maven+java+docker+npm镜像构建
 
 ### 环境支持
 
-* maven:3.6.0
-* java8:181.13-r0
-* docker:18.09.0
-* nodejs-npm
-* shadow(权限修改)
+* maven(`mvn -v`):3.6.0
+* java8(`java -version`):181.13-r0
+* docker(`docker -v`):18.09.0
+* nodejs-npm(`npm -v`)
+* shadow(权限修改)(`usermod `)
 
 ### 自动构建镜像支持：java编译打包、maven编译打包、前端vue编译打包
 
 ### 使用
 
-1. 注册方式和官方runner一样，命令执行模式选择shell就可以，其他默认就行
-2. 测试，进入容器，然后执行docker命令，如果没有权限，执行`chown :root /var/run/docker.sock`
+1. 安装部署
+
+   ```yaml
+     gitlab-runner:
+       image: xuan/gitlab-runner:alpine
+       volumes:
+         - /dockerdata/v-gitlab-runner/config:/etc/gitlab-runner
+         - /var/run/docker.sock:/var/run/docker.sock
+       deploy:
+         mode: replicated
+         replicas: 1
+   ```
+
+2. 注册方式和官方runner一样，进入容器执行`gitlab-runner register`,命令执行模式选择shell就可以，其他默认就行
+
+3. 进入容器，然后执行docker命令，如果没有权限，需要在宿主机内执行`chown :root /var/run/docker.sock`
 
 ##### java/maven编译打包
 
