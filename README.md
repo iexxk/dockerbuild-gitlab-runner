@@ -19,7 +19,7 @@ gitlabRunner+maven+java+docker+npm镜像构建
 
    ```yaml
      gitlab-runner:
-       image: xuan/gitlab-runner:alpine
+       image: exxk/gitlab-runner:latest
        volumes:
          - /dockerdata/v-gitlab-runner/config:/etc/gitlab-runner
          - /var/run/docker.sock:/var/run/docker.sock
