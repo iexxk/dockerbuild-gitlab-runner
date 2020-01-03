@@ -3,7 +3,7 @@ FROM gitlab/gitlab-runner:alpine
 RUN echo http://dl-2.alpinelinux.org/alpine/edge/community/ >> /etc/apk/repositories \ 
 && apk add --no-cache curl tar bash procps nodejs nodejs-npm shadow openssh-keygen openssh \
 && npm install -g cnpm --registry=https://registry.npm.taobao.org \
-&& mkdir .ssh && cd .ssh && ssh-keygen -t rsa -N '' -f id_rsa -q && cd ..
+&& mkdir .ssh && cd .ssh && ssh-keygen -t rsa -N '' -f id_rsa -q && touch known_hosts && cd ..
 # docker
 ENV VERSION "18.09.0"
 RUN curl -L -o /tmp/docker-$VERSION.tgz https://download.docker.com/linux/static/stable/x86_64/docker-$VERSION.tgz \
