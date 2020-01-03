@@ -34,7 +34,7 @@ ENV JAVA_ALPINE_VERSION 8.232.09-r0
 RUN set -x \
 	&& apk add --no-cache \
 		openjdk8-jre="$JAVA_ALPINE_VERSION" \
-	&& [ "$JAVA_HOME" = "$(docker-java-home)" ]
+	&& [ "$JAVA_HOME"="$(docker-java-home)" ]
 
 # maven
 
