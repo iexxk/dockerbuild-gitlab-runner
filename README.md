@@ -10,6 +10,7 @@ gitlabRunner+maven+java+docker+npm镜像构建
 * docker(`docker -v`):18.09.0
 * nodejs-npm(`npm -v`)
 * shadow(权限修改)(`usermod `)
+* ssh(openssh-keygen+openssh)
 
 ### 自动构建镜像支持：java编译打包、maven编译打包、前端vue编译打包
 
