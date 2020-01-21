@@ -2,8 +2,10 @@ FROM gitlab/gitlab-runner:alpine
 # 公共需求+npm安装（nodejs nodejs-npm）(shadow 是 权限usermod修改)
 RUN echo http://dl-2.alpinelinux.org/alpine/edge/community/ >> /etc/apk/repositories \ 
 && apk add --no-cache curl tar bash procps nodejs nodejs-npm shadow openssh-keygen openssh \
-&& npm install -g cnpm --registry=https://registry.npm.taobao.org \
-&& cd /root && mkdir .ssh && chmod 666 .ssh && cd .ssh && ssh-keygen -t rsa -N '' -f id_rsa -q && touch known_hosts && chmod 666 known_hosts && cd /
+&& npm install -g cnpm --registry=https://registry.npm.taobao.org 
+USER gitlab-runner
+RUN cd /root && mkdir .ssh && chmod 666 .ssh && cd .ssh && ssh-keygen -t rsa -N '' -f id_rsa -q && touch known_hosts && chmod 666 known_hosts && cd /
+USER root
 # docker
 ENV VERSION "18.09.0"
 RUN curl -L -o /tmp/docker-$VERSION.tgz https://download.docker.com/linux/static/stable/x86_64/docker-$VERSION.tgz \
