@@ -4,7 +4,7 @@ RUN echo http://dl-2.alpinelinux.org/alpine/edge/community/ >> /etc/apk/reposito
 && apk add --no-cache curl tar bash procps nodejs nodejs-npm shadow openssh-keygen openssh \
 && npm install -g cnpm --registry=https://registry.npm.taobao.org 
 USER gitlab-runner
-RUN cd /root && mkdir .ssh && chmod 666 .ssh && cd .ssh && ssh-keygen -t rsa -N '' -f id_rsa -q && touch known_hosts && chmod 666 known_hosts && cd /
+RUN cd ~ && mkdir .ssh && cd .ssh && ssh-keygen -t rsa -N '' -f id_rsa -q && touch known_hosts && cd /
 USER root
 # docker
 ENV VERSION "18.09.0"
