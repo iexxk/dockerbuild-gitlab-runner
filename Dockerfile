@@ -2,7 +2,6 @@ FROM gitlab/gitlab-runner:alpine
 # 公共需求+npm安装（nodejs nodejs-npm）(shadow 是 权限usermod修改)
 RUN echo http://dl-2.alpinelinux.org/alpine/edge/community/ >> /etc/apk/repositories \ 
 && apk add --no-cache curl tar bash procps nodejs nodejs-npm shadow openssh-keygen openssh \
-&& cd /home/gitlab-runner && mkdir .ssh && cd .ssh && ssh-keygen -t rsa -N '' -f id_rsa -q && touch known_hosts && chown -R gitlab-runner:nogroup /home/gitlab-runner/.ssh && cd / \
 && npm install -g cnpm --registry=https://registry.npm.taobao.org 
 # docker
 ENV VERSION "18.09.0"
@@ -55,3 +54,6 @@ ENV MAVEN_CONFIG "$USER_HOME_DIR/.m2"
 
 COPY mvn-entrypoint.sh /usr/local/bin/mvn-entrypoint.sh
 COPY settings-docker.xml /usr/share/maven/ref/
+
+# 添加ssh
+RUN cd /home/gitlab-runner && mkdir .ssh && cd .ssh && ssh-keygen -t rsa -N '' -f id_rsa -q && touch known_hosts && chown -R gitlab-runner:nogroup /home/gitlab-runner/.ssh && cd /
