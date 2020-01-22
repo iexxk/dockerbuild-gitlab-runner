@@ -34,8 +34,8 @@ gitlabRunner+maven+java+docker+npm镜像构建
 3. 进入容器，然后执行docker命令，如果没有权限，需要在宿主机内执行`chown :root /var/run/docker.sock`
 
 ### ssh使用
-1. 添加挂载卷` - /home/dockerdata/v-gitlab/runner/data:/home/gitlab-runner`
-2. 进入容器，执行 `cd /home/gitlab-runner && mkdir .ssh && cd .ssh && ssh-keygen -t rsa -N '' -f id_rsa -q && touch known_hosts && chown -R gitlab-runner:nogroup /home/gitlab-runner/.ssh`
+1. 添加挂载卷` - /home/dockerdata/v-gitlab/runner/ssh:/home/gitlab-runner/.ssh`
+2. 进入容器，执行 `cd /home/gitlab-runner && cd .ssh && ssh-keygen -t rsa -N '' -f id_rsa -q && touch known_hosts && chown -R gitlab-runner:nogroup /home/gitlab-runner/.ssh`
 3. 首次添加需要远程的主机，添加know_hosts,执行`ssh-keyscan -H 10.30.11.150 >>/home/gitlab-runner/.ssh/known_hosts`
 4. 复制.ssh目录下的id_rsa.pub文件里面的内容，然后粘贴到宿主机`vim .ssh/authorized_keys`文件里面，没有该文件创建
 
