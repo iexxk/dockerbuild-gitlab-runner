@@ -54,6 +54,3 @@ ENV MAVEN_CONFIG "$USER_HOME_DIR/.m2"
 
 COPY mvn-entrypoint.sh /usr/local/bin/mvn-entrypoint.sh
 COPY settings-docker.xml /usr/share/maven/ref/
-
-# 添加ssh
-RUN cd /home/gitlab-runner && mkdir .ssh && cd .ssh && ssh-keygen -t rsa -N '' -f id_rsa -q && touch known_hosts && chown -R gitlab-runner:nogroup /home/gitlab-runner/.ssh && cd /
